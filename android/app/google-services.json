@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "378893812241",
+    "project_id": "salety-397b1",
+    "storage_bucket": "salety-397b1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378893812241:android:feb8aaffe8ed8f1748e7b0",
+        "android_client_info": {
+          "package_name": "com.example.salety"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX3-4VDUKYVOUBtEENUcDAUybBZrML3j8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
