@@ -5,17 +5,25 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:task1intern/core/routing/router.dart';
 import 'package:task1intern/core/routing/routes.dart';
-import 'package:task1intern/features/local_notification_helper.dart';
-import 'package:task1intern/firebase_notificathion_helper.dart';
+import 'package:task1intern/core/helper/notification/local_notification_helper.dart';
+import 'package:task1intern/core/helper/notification/firebase_notificathion_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseNotification().initNotification();
-    FirebaseMessaging.onBackgroundMessage(firebaseBackgroundHandler);
-    await NotificationHelper.initialize();
+  FirebaseMessaging.onBackgroundMessage(firebaseBackgroundHandler);
+  await NotificationHelper.initialize();
+
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize("760e4ec1-714b-4726-9689-ec43545062cb");
+  OneSignal.Notifications.requestPermission(true);
+
+ 
+
   runApp(
     DevicePreview(
         enabled: !kReleaseMode,

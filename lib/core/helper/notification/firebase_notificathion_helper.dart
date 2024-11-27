@@ -1,7 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:task1intern/core/helper/extentions.dart';
 import 'package:task1intern/core/routing/routes.dart';
-import 'package:task1intern/features/local_notification_helper.dart';
+import 'package:task1intern/core/helper/notification/local_notification_helper.dart';
 import 'package:task1intern/main.dart';
 
 class FirebaseNotification {
