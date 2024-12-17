@@ -5,17 +5,22 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task1intern/core/di/di.dart';
 import 'package:task1intern/core/routing/router.dart';
 import 'package:task1intern/core/routing/routes.dart';
 import 'package:task1intern/features/local_notification_helper.dart';
 import 'package:task1intern/firebase_notificathion_helper.dart';
+import 'package:task1intern/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   FirebaseNotification().initNotification();
-    FirebaseMessaging.onBackgroundMessage(firebaseBackgroundHandler);
-    await NotificationHelper.initialize();
+  FirebaseMessaging.onBackgroundMessage(firebaseBackgroundHandler);
+  await NotificationHelper.initialize();
+  await setupGetIt();
   runApp(
     DevicePreview(
         enabled: !kReleaseMode,

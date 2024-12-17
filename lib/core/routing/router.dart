@@ -1,10 +1,13 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task1intern/core/di/di.dart';
 import 'package:task1intern/core/routing/routes.dart';
 import 'package:task1intern/features/auth/forget_password/ui/check_phone_screen.dart';
 import 'package:task1intern/features/auth/forget_password/ui/forget_password_screen.dart';
 import 'package:task1intern/features/auth/forget_password/ui/otp_screen.dart';
 import 'package:task1intern/features/auth/forget_password/ui/password_changed_screen.dart';
+import 'package:task1intern/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:task1intern/features/auth/main_auth_screen.dart';
 import 'package:task1intern/features/auth/login/ui/login_screen.dart';
 import 'package:task1intern/features/home/ui/main_screen.dart';
@@ -35,7 +38,11 @@ class AppRouter {
       case Routes.signUpScreen:
         return MaterialPageRoute(builder: (context) => const SignUpScreen());
       case Routes.loginScreen:
-        return MaterialPageRoute(builder: (context) => const LoginScreen());
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<LoginCubit>(),
+                  child: const LoginScreen(),
+                ));
       case Routes.forgetPassScreen:
         return MaterialPageRoute(
             builder: (context) => const ForgetPasswordScreen());

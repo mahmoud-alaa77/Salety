@@ -61,6 +61,12 @@ buildRegisterBody(BuildContext context, double screenHeight) {
       ),
       verticalSpace(24),
       AppTextFormField(
+        validator: (val) {
+          if (val!.isEmpty) {
+            return "حقل البريد الالكتروني مطلوب";
+          }
+          return null;
+        },
         hint: "الاسم",
         hintStyle: TextStyle(
             fontSize: HelperFunctions().getResponsiveFontSize(
@@ -71,6 +77,12 @@ buildRegisterBody(BuildContext context, double screenHeight) {
       ),
       verticalSpace(20),
       AppTextFormField(
+        validator: (val) {
+          if (val!.isEmpty) {
+            return "حقل البريد الالكتروني مطلوب";
+          }
+          return null;
+        },
         hint: "عنوان البريد الالكتروني",
         hintStyle: TextStyle(
             fontSize: HelperFunctions().getResponsiveFontSize(
@@ -85,6 +97,12 @@ buildRegisterBody(BuildContext context, double screenHeight) {
       ),
       verticalSpace(20),
       AppTextFormField(
+        validator: (val) {
+          if (val!.isEmpty) {
+            return "حقل البريد الالكتروني مطلوب";
+          }
+          return null;
+        },
         hint: "كلمة المرور",
         hintStyle: TextStyle(
             fontSize: HelperFunctions().getResponsiveFontSize(

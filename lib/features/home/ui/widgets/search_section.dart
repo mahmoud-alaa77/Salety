@@ -17,7 +17,11 @@ class SearchSection extends StatelessWidget {
       children: [
         CustomIconButton(
           icon: Icons.tune,
-          iconSize:  isTablet ? 50.w :isPortrait && !isTablet ? 48.w : 26.w,
+          iconSize: isTablet
+              ? 50.w
+              : isPortrait && !isTablet
+                  ? 48.w
+                  : 26.w,
           color: AppColors.redColor,
           borderRadius: BorderRadius.circular(16.r),
           iconColor: Colors.white,
@@ -25,6 +29,12 @@ class SearchSection extends StatelessWidget {
         ),
         Expanded(
             child: AppTextFormField(
+          validator: (val) {
+            if (val!.isEmpty) {
+              return "حقل البريد الالكتروني مطلوب";
+            }
+            return null;
+          },
           hint: "البحث عن المنتجات...",
           hintStyle: isTablet
               ? AppTextStyles.font16greyw200

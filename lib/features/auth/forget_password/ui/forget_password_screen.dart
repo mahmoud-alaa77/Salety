@@ -70,9 +70,21 @@ class ForgetPasswordScreen extends StatelessWidget {
           suffixIcon: const Icon(
             Icons.visibility,
           ),
+          validator: ( val){
+          if (val!.isEmpty) {
+            return "حقل البريد الالكتروني مطلوب";
+          }
+          return null;
+        },
         ),
         verticalSpace(20),
         AppTextFormField(
+          validator: ( val){
+          if (val!.isEmpty) {
+            return "حقل البريد الالكتروني مطلوب";
+          }
+          return null;
+        },
           hint: "كلمة مرور جديدة",
           hintStyle: TextStyle(
               fontSize: HelperFunctions().getResponsiveFontSize(

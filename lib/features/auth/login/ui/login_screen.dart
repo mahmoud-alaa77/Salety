@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task1intern/core/helper/constants.dart';
 import 'package:task1intern/core/helper/extentions.dart';
 import 'package:task1intern/core/helper/helper_functions.dart';
 import 'package:task1intern/core/helper/spacing.dart';
+import 'package:task1intern/core/routing/router.dart';
 import 'package:task1intern/core/routing/routes.dart';
 import 'package:task1intern/core/themes/app_colors.dart';
 import 'package:task1intern/core/themes/app_text_styles.dart';
-import 'package:task1intern/core/widgets/app_text_form_field.dart';
 import 'package:task1intern/core/widgets/text_and_colored_buton.dart';
+import 'package:task1intern/features/auth/login/logic/cubit/login_cubit.dart';
+import 'package:task1intern/features/auth/login/ui/widgets/email_and_password.dart';
+import 'package:task1intern/features/auth/login/ui/widgets/login_bloc_listener.dart';
 import 'package:task1intern/features/auth/widgets/auth_app_bar.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -58,31 +62,7 @@ buildLoginBody(BuildContext context, double screenHeight) {
           width: 220.w,
         ),
       ),
-      AppTextFormField(
-        hint: "عنوان البريد الالكتروني",
-        hintStyle: TextStyle(
-            fontSize: HelperFunctions().getResponsiveFontSize(
-              context,
-              fontSize: 18,
-            ),
-            color: Colors.grey),
-        suffixIcon: const Icon(
-          Icons.done,
-          color: AppColors.greenColor,
-        ),
-      ),
-      verticalSpace(20),
-      AppTextFormField(
-        hint: "كلمة المرور",
-        hintStyle: TextStyle(
-            fontSize: HelperFunctions().getResponsiveFontSize(
-              context,
-              fontSize: 18,
-            ),
-            color: Colors.grey),
-        obscureText: true,
-        suffixIcon: const Icon(Icons.visibility_off),
-      ),
+      EmailAndPassword(),
       verticalSpace(4),
       TextButton(
         onPressed: () {
@@ -102,7 +82,7 @@ buildLoginBody(BuildContext context, double screenHeight) {
         width: double.infinity,
         color: AppColors.greenColor,
         onTap: () {
-          context.pushNamed(Routes.mainScreen);
+          context.read<LoginCubit>().validateAndLogin();
         },
       ),
       verticalSpace(48),
@@ -131,7 +111,8 @@ buildLoginBody(BuildContext context, double screenHeight) {
             ),
           )
         ],
-      )
+      ),
+      LoginBlocListener(),
     ],
   );
 }
