@@ -64,7 +64,11 @@ class AppRouter {
       // case Routes.homeScreen:
       //   return MaterialPageRoute(builder: (context) => const HomeScreen());
       case Routes.profileScreen:
-        return MaterialPageRoute(builder: (context) => const ProfileScreen());
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProfileCubit>()..getProfileData(),
+                  child: const ProfileScreen(),
+                ));
       case Routes.allCategoriesScreen:
         return MaterialPageRoute(
             builder: (context) => const AllCategoriesScreen());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task1intern/core/helper/extentions.dart';
 import 'package:task1intern/core/helper/spacing.dart';
 import 'package:task1intern/core/routing/routes.dart';
@@ -36,21 +37,25 @@ class HomeAppBar extends StatelessWidget {
                     context.pushNamed(Routes.profileScreen);
                   },
                   child: CircleAvatar(
-                    radius: isTablet ? 50.w : 25.w,
-                    backgroundColor: Colors.white,
-                    child: CircleAvatar(
-                      radius: isTablet ? 48.w : 23.w,
-                      backgroundImage:
-                          const AssetImage('assets/images/person.jpg'),
-                    ),
-                  ),
+                      radius: isTablet ? 50.w : 25.w,
+                      backgroundColor: Colors.white,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        width: isTablet ? 50.w : 25.w,
+                        child: Center(
+                          child: SvgPicture.network(state.profile.data!.profilePhotoUrl.toString(),fit: BoxFit.fill,),
+                        ),
+                        
+                      )),
                 ),
                 horizontalSpace(6),
                 Column(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                    state.profile.data!.name.toString(),
+                      state.profile.data!.name.toString(),
                       style: isTablet
                           ? AppTextStyles.font26BlackBold
                           : AppTextStyles.font12BlackW300,
@@ -63,7 +68,7 @@ class HomeAppBar extends StatelessWidget {
                         ),
                         horizontalSpace(4),
                         Text(
-                    state.profile.data!.mobile.toString(),
+                          state.profile.data!.mobile.toString(),
                           style: isTablet
                               ? AppTextStyles.font16greyw200
                               : AppTextStyles.font8greyw200,
