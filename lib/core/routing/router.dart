@@ -10,6 +10,7 @@ import 'package:task1intern/features/auth/forget_password/ui/password_changed_sc
 import 'package:task1intern/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:task1intern/features/auth/main_auth_screen.dart';
 import 'package:task1intern/features/auth/login/ui/login_screen.dart';
+import 'package:task1intern/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
 import 'package:task1intern/features/home/ui/main_screen.dart';
 import 'package:task1intern/features/home/ui/screens/all_categories_screen.dart';
 import 'package:task1intern/features/home/ui/screens/shoping_cart_screen.dart';
@@ -21,6 +22,7 @@ import 'package:task1intern/features/payment/ui/order_address_screen.dart';
 import 'package:task1intern/features/payment/ui/payment_screen.dart';
 import 'package:task1intern/features/payment/ui/success_order_screen.dart';
 import 'package:task1intern/features/payment/ui/track_order_screen.dart';
+import 'package:task1intern/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:task1intern/features/profile/ui/profile_screen.dart';
 import 'package:task1intern/features/splash/ui/splash_screen.dart';
 
@@ -36,7 +38,11 @@ class AppRouter {
       case Routes.authScreen:
         return MaterialPageRoute(builder: (context) => const MainAuthScreen());
       case Routes.signUpScreen:
-        return MaterialPageRoute(builder: (context) => const SignUpScreen());
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<SignUpCubit>(),
+                  child: const SignUpScreen(),
+                ));
       case Routes.loginScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
@@ -50,7 +56,11 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => const PasswordChangedScreen());
       case Routes.mainScreen:
-        return MaterialPageRoute(builder: (context) => const MainScreen());
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProfileCubit>()..getProfileData(),
+                  child: const MainScreen(),
+                ));
       // case Routes.homeScreen:
       //   return MaterialPageRoute(builder: (context) => const HomeScreen());
       case Routes.profileScreen:

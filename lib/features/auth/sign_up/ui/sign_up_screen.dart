@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task1intern/core/helper/extentions.dart';
 import 'package:task1intern/core/helper/helper_functions.dart';
 import 'package:task1intern/core/helper/spacing.dart';
 import 'package:task1intern/core/routing/routes.dart';
 import 'package:task1intern/core/themes/app_colors.dart';
 import 'package:task1intern/core/themes/app_text_styles.dart';
-import 'package:task1intern/core/widgets/app_text_form_field.dart';
 import 'package:task1intern/core/widgets/text_and_colored_buton.dart';
+import 'package:task1intern/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
 import 'package:task1intern/features/auth/sign_up/ui/widgets/another_sign_up_ways.dart';
+import 'package:task1intern/features/auth/sign_up/ui/widgets/sign_up_bloc_listener.dart';
+import 'package:task1intern/features/auth/sign_up/ui/widgets/sign_up_form.dart';
 import 'package:task1intern/features/auth/widgets/auth_app_bar.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -60,65 +63,13 @@ buildRegisterBody(BuildContext context, double screenHeight) {
         style: AppTextStyles.font16greyw200.copyWith(fontSize: 14),
       ),
       verticalSpace(24),
-      AppTextFormField(
-        validator: (val) {
-          if (val!.isEmpty) {
-            return "حقل البريد الالكتروني مطلوب";
-          }
-          return null;
-        },
-        hint: "الاسم",
-        hintStyle: TextStyle(
-            fontSize: HelperFunctions().getResponsiveFontSize(
-              context,
-              fontSize: 18,
-            ),
-            color: Colors.grey),
-      ),
-      verticalSpace(20),
-      AppTextFormField(
-        validator: (val) {
-          if (val!.isEmpty) {
-            return "حقل البريد الالكتروني مطلوب";
-          }
-          return null;
-        },
-        hint: "عنوان البريد الالكتروني",
-        hintStyle: TextStyle(
-            fontSize: HelperFunctions().getResponsiveFontSize(
-              context,
-              fontSize: 18,
-            ),
-            color: Colors.grey),
-        suffixIcon: const Icon(
-          Icons.done,
-          color: AppColors.greenColor,
-        ),
-      ),
-      verticalSpace(20),
-      AppTextFormField(
-        validator: (val) {
-          if (val!.isEmpty) {
-            return "حقل البريد الالكتروني مطلوب";
-          }
-          return null;
-        },
-        hint: "كلمة المرور",
-        hintStyle: TextStyle(
-            fontSize: HelperFunctions().getResponsiveFontSize(
-              context,
-              fontSize: 18,
-            ),
-            color: Colors.grey),
-        obscureText: true,
-        suffixIcon: const Icon(Icons.visibility_off),
-      ),
+      SignUpForm(),
       verticalSpace(.08 * screenHeight),
       TextAndColoredButton(
           height: screenHeight * .065,
           title: "اشتراك",
           onTap: () {
-            context.pushNamed(Routes.mainScreen);
+            context.read<SignUpCubit>().validateAndSignUp();
           },
           width: double.infinity,
           color: AppColors.greenColor),
@@ -155,7 +106,8 @@ buildRegisterBody(BuildContext context, double screenHeight) {
             ),
           )
         ],
-      )
+      ),
+      SignUpBlocListener()
     ],
   );
 }

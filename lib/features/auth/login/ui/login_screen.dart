@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task1intern/core/helper/constants.dart';
 import 'package:task1intern/core/helper/extentions.dart';
 import 'package:task1intern/core/helper/helper_functions.dart';
+import 'package:task1intern/core/helper/shared_pref_helpers.dart';
 import 'package:task1intern/core/helper/spacing.dart';
 import 'package:task1intern/core/routing/router.dart';
 import 'package:task1intern/core/routing/routes.dart';
@@ -81,8 +84,10 @@ buildLoginBody(BuildContext context, double screenHeight) {
         title: "تسجيل الدخول",
         width: double.infinity,
         color: AppColors.greenColor,
-        onTap: () {
-          context.read<LoginCubit>().validateAndLogin();
+        onTap: () async {
+          await context.read<LoginCubit>().validateAndLogin();
+          // String l =await SharedPrefHelper.getString("token");
+          // log(l);
         },
       ),
       verticalSpace(48),
