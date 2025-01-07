@@ -18,7 +18,7 @@ class SignUpBlocListener extends StatelessWidget {
           context.pop();
 
           if (state.signUpResponseBody.status == true) {
-            context.pushNamed(Routes.mainScreen);
+            context.pushNamed(Routes.loginScreen);
           } else {
             showDialog(
               context: context,

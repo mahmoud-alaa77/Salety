@@ -54,7 +54,7 @@ class ImageAndNameSection extends StatelessWidget {
                                   color: Colors.yellow, shape: BoxShape.circle),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100.r),
-                                child: SvgPicture.network(
+                                child: Image.network(
                                   state.profile.data!.profilePhotoUrl
                                       .toString(),
                                   fit: BoxFit.fill,

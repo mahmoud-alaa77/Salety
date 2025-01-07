@@ -4,6 +4,7 @@ import 'package:task1intern/core/networking/api_constants.dart';
 import 'package:task1intern/features/auth/login/data/models/request_model.dart';
 import 'package:task1intern/features/auth/sign_up/data/models/sign_up_request_model.dart';
 import 'package:task1intern/features/auth/sign_up/data/models/sign_up_response_model.dart';
+import 'package:task1intern/features/home/data/models/slider_products_model.dart';
 import 'package:task1intern/features/profile/data/models/profile_response_model.dart';
 
 import '../../features/auth/login/data/models/response_model.dart';
@@ -22,6 +23,7 @@ abstract class ApiService {
 
   @GET(ApiConstants.profile)
   Future<ProfileResponseModel> getProfileData();
+
+  @GET(ApiConstants.sliderProducts)
+  Future<SliderProductModel> getSliderProducts();
 }
-
-

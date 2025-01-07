@@ -6,6 +6,7 @@ class ApiConstants {
   static const String login = 'login';
   static const String signUp = 'register';
   static const String profile ='profile';
+  static const String sliderProducts ='/advertising/t/ar/0';
 
 
 }

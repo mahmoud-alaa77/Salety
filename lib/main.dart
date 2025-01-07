@@ -1,11 +1,11 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task1intern/core/di/di.dart';
+import 'package:task1intern/core/helper/bloc_observer.dart';
 import 'package:task1intern/core/routing/router.dart';
 import 'package:task1intern/core/routing/routes.dart';
 import 'package:task1intern/features/local_notification_helper.dart';
@@ -14,6 +14,7 @@ import 'package:task1intern/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = SimpleBlocObserver();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -22,11 +23,9 @@ void main() async {
   await NotificationHelper.initialize();
   await setupGetIt();
   runApp(
-    DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => MyApp(
-              appRouter: AppRouter(),
-            )),
+    MyApp(
+      appRouter: AppRouter(),
+    ),
   );
 }
 
@@ -45,8 +44,8 @@ class MyApp extends StatelessWidget {
       designSize: const Size(392, 872),
       child: MaterialApp(
         navigatorKey: navigatorKey,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+        // locale: DevicePreview.locale(context),
+        // builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

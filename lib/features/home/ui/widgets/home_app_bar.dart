@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task1intern/core/helper/extentions.dart';
 import 'package:task1intern/core/helper/spacing.dart';
 import 'package:task1intern/core/routing/routes.dart';
@@ -45,9 +44,11 @@ class HomeAppBar extends StatelessWidget {
                         ),
                         width: isTablet ? 50.w : 25.w,
                         child: Center(
-                          child: SvgPicture.network(state.profile.data!.profilePhotoUrl.toString(),fit: BoxFit.fill,),
+                          child: Image.network(
+                            state.profile.data!.profilePhotoUrl.toString(),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        
                       )),
                 ),
                 horizontalSpace(6),
@@ -97,59 +98,81 @@ class HomeAppBar extends StatelessWidget {
   }
 
   buildLandScapeLayout(BuildContext context, bool isTablet) {
-    return Padding(
-      padding: EdgeInsetsDirectional.symmetric(horizontal: 16.r),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              context.pushNamed(Routes.profileScreen);
-            },
-            child: CircleAvatar(
-              radius: isTablet ? 30.w : 17.w,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: isTablet ? 28.w : 15.w,
-                backgroundImage: const AssetImage('assets/images/person.jpg'),
-              ),
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        if (state is ProfileLoaded) {
+          return Padding(
+            padding: EdgeInsetsDirectional.symmetric(horizontal: 16.r),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    context.pushNamed(Routes.profileScreen);
+                  },
+                  child: CircleAvatar(
+                      radius: isTablet ? 50.w : 18.w,
+                      backgroundColor: Colors.white,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        width: isTablet ? 50.w : 20.w,
+                        child: Center(
+                          child: Image.network(
+                            state.profile.data!.profilePhotoUrl.toString(),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )),
+                ),
+                horizontalSpace(isTablet ? 6 : 2),
+                Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      state.profile.data!.name.toString(),
+                      style: isTablet
+                          ? AppTextStyles.font26BlackBold
+                          : AppTextStyles.font10BlackW300,
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.phone_android,
+                          color: AppColors.redColor,
+                        ),
+                        horizontalSpace(4),
+                        Text(
+                          state.profile.data!.mobile.toString(),
+                          style: isTablet
+                              ? AppTextStyles.font16greyw200
+                              : AppTextStyles.font8greyw200,
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                const Spacer(),
+                CustomIconButton(
+                  icon: Icons.camera_alt_outlined,
+                  iconSize: isTablet ? 45.w : 20.w,
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                ),
+              ],
             ),
-          ),
-          horizontalSpace(isTablet ? 6 : 2),
-          Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "محمود علاء",
-                style: isTablet
-                    ? AppTextStyles.font26BlackBold
-                    : AppTextStyles.font10BlackW300,
-              ),
-              Row(
-                children: [
-                  const Icon(
-                    Icons.location_on,
-                    color: AppColors.redColor,
-                  ),
-                  horizontalSpace(4),
-                  Text(
-                    "المنوفية - شبين الكوم",
-                    style: isTablet
-                        ? AppTextStyles.font16greyw200
-                        : AppTextStyles.font8greyw200.copyWith(fontSize: 6.sp),
-                  )
-                ],
-              )
-            ],
-          ),
-          const Spacer(),
-          CustomIconButton(
-            icon: Icons.camera_alt_outlined,
-            iconSize: isTablet ? 45.w : 20.w,
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.white,
-          ),
-        ],
-      ),
+          );
+        } else if (state is ProfileError) {
+          return Text(state.errorMessage);
+        } else {
+          return SizedBox.shrink();
+        }
+      },
     );
   }
 }
+
+
+/*
+
+*/

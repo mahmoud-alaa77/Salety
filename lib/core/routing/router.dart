@@ -11,6 +11,7 @@ import 'package:task1intern/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:task1intern/features/auth/main_auth_screen.dart';
 import 'package:task1intern/features/auth/login/ui/login_screen.dart';
 import 'package:task1intern/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
+import 'package:task1intern/features/home/logic/cubit/slider_product_cubit.dart';
 import 'package:task1intern/features/home/ui/main_screen.dart';
 import 'package:task1intern/features/home/ui/screens/all_categories_screen.dart';
 import 'package:task1intern/features/home/ui/screens/shoping_cart_screen.dart';
@@ -57,8 +58,16 @@ class AppRouter {
             builder: (context) => const PasswordChangedScreen());
       case Routes.mainScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => getIt<ProfileCubit>()..getProfileData(),
+            builder: (context) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) =>
+                          getIt<ProfileCubit>()..getProfileData(),
+                    ),
+                    BlocProvider(
+                      create: (context) => getIt<SliderProductCubit>()..getSliderProducts(),
+                    ),
+                  ],
                   child: const MainScreen(),
                 ));
       // case Routes.homeScreen:
