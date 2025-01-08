@@ -36,8 +36,8 @@ class BestValuesList extends StatelessWidget {
                       width: isTablet ? 400.w : 280.w,
                       height: isTablet ? 200.h : 120.h,
                       child: Image.network(
-                        "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600",
-                        fit: BoxFit.cover,
+                        "https://master-market.masool.net/uploads/${state.products.data![index].img}",
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),
@@ -74,7 +74,7 @@ class BestValuesList extends StatelessWidget {
             width: double.infinity,
             height: isTablet ? 220.h : 170.h,
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: state.products.data!.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return Container(
@@ -87,8 +87,8 @@ class BestValuesList extends StatelessWidget {
                       height: isTablet ? 215.h : 160.h,
                       child: Image.network(
                       
-                            "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600",
-                        fit: BoxFit.cover,
+                           "https://master-market.masool.net/uploads/${state.products.data![index].img}",
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),

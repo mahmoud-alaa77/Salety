@@ -6,14 +6,19 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task1intern/core/di/di.dart';
 import 'package:task1intern/core/helper/bloc_observer.dart';
+import 'package:task1intern/core/helper/shared_pref_helpers.dart';
 import 'package:task1intern/core/routing/router.dart';
 import 'package:task1intern/core/routing/routes.dart';
 import 'package:task1intern/features/local_notification_helper.dart';
 import 'package:task1intern/firebase_notificathion_helper.dart';
 import 'package:task1intern/firebase_options.dart';
 
+
+bool isLoggedInUser = false;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+    await checkIfLoggedInUser();
   Bloc.observer = SimpleBlocObserver();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -59,9 +64,18 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [
           Locale('ar'),
         ],
-        initialRoute: Routes.splashScreen,
+        initialRoute: isLoggedInUser ? Routes.mainScreen : Routes.splashScreen,
         onGenerateRoute: appRouter.genrateRoute,
       ),
     );
+  }
+}
+
+checkIfLoggedInUser() async {
+  String? userToken = await SharedPrefHelper.getString('token');
+  if (userToken!.isNotEmpty || userToken != null) {
+    isLoggedInUser = true;
+  } else {
+    isLoggedInUser = false;
   }
 }
