@@ -37,7 +37,7 @@ class BestValuesList extends StatelessWidget {
                       height: isTablet ? 200.h : 120.h,
                       child: Image.network(
                         "https://master-market.masool.net/uploads/${state.products.data![index].img}",
-                        fit: BoxFit.fill,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
@@ -88,7 +88,7 @@ class BestValuesList extends StatelessWidget {
                       child: Image.network(
                       
                            "https://master-market.masool.net/uploads/${state.products.data![index].img}",
-                        fit: BoxFit.fill,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
