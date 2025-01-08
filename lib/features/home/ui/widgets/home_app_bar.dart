@@ -6,7 +6,9 @@ import 'package:task1intern/core/helper/spacing.dart';
 import 'package:task1intern/core/routing/routes.dart';
 import 'package:task1intern/core/themes/app_colors.dart';
 import 'package:task1intern/core/themes/app_text_styles.dart';
+import 'package:task1intern/core/widgets/custom_circle_loading_widget.dart';
 import 'package:task1intern/core/widgets/custom_icon_button.dart';
+import 'package:task1intern/core/widgets/custom_shimmer_loading_container.dart';
 import 'package:task1intern/features/profile/logic/cubit/profile_cubit.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -91,7 +93,25 @@ class HomeAppBar extends StatelessWidget {
         } else if (state is ProfileError) {
           return Text(state.errorMessage);
         } else {
-          return SizedBox.shrink();
+          return Padding(
+            padding: EdgeInsetsDirectional.symmetric(horizontal: 16.r),
+            child: Row(
+              children: [
+                CustomCircleLoadingWidget(height: 60.h, width: 60.h),
+                horizontalSpace(6),
+                Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomShimmerLoadingContainer(height: 18.h, width: 100.w),
+                    verticalSpace(4),
+                    CustomShimmerLoadingContainer(height: 18.h, width: 100.w),
+                  ],
+                ),
+                const Spacer(),
+                CustomCircleLoadingWidget(height: 40.h, width: 40.h),
+              ],
+            ),
+          );
         }
       },
     );
@@ -165,7 +185,25 @@ class HomeAppBar extends StatelessWidget {
         } else if (state is ProfileError) {
           return Text(state.errorMessage);
         } else {
-          return SizedBox.shrink();
+          return Padding(
+            padding: EdgeInsetsDirectional.symmetric(horizontal: 16.r),
+            child: Row(
+              children: [
+                CustomCircleLoadingWidget(height: 60.h, width: 60.h),
+                horizontalSpace(0),
+                Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomShimmerLoadingContainer(height: 18.h, width: 100.w),
+                    verticalSpace(8),
+                    CustomShimmerLoadingContainer(height: 18.h, width: 100.w),
+                  ],
+                ),
+                const Spacer(),
+                CustomCircleLoadingWidget(height: 40.h, width: 40.h),
+              ],
+            ),
+          );
         }
       },
     );

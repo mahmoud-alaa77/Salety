@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:task1intern/core/widgets/custom_shimmer_loading_container.dart';
 import 'package:task1intern/features/home/logic/cubit/slider_product_cubit.dart';
 
 class BestValuesList extends StatelessWidget {
@@ -44,10 +45,22 @@ class BestValuesList extends StatelessWidget {
               },
             ),
           );
-        } else if (state is SliderProductLoading) {
-          return CircularProgressIndicator();
+        } else if (state is SliderProductError) {
+          return Center(child: Text(state.message.toString()));
         } else {
-          return SizedBox.shrink();
+          return SizedBox(
+              width: double.infinity,
+              height: isTablet ? 220.h : 130.h,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return CustomShimmerLoadingContainer(
+                    width: isTablet ? 400.w : 280.w,
+                    height: isTablet ? 200.h : 120.h,
+                  );
+                },
+              ));
         }
       },
     );
@@ -73,7 +86,8 @@ class BestValuesList extends StatelessWidget {
                       width: isTablet ? 450.w : 180.w,
                       height: isTablet ? 215.h : 160.h,
                       child: Image.network(
-                        "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600",
+                      
+                            "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -85,7 +99,19 @@ class BestValuesList extends StatelessWidget {
         } else if (state is SliderProductLoading) {
           return CircularProgressIndicator();
         } else {
-          return SizedBox.shrink();
+          return SizedBox(
+              width: double.infinity,
+            height: isTablet ? 220.h : 170.h,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return CustomShimmerLoadingContainer(
+                    width: isTablet ? 450.w : 180.w,
+                      height: isTablet ? 215.h : 160.h,
+                  );
+                },
+              ));
         }
       },
     );
