@@ -46,8 +46,8 @@ class HomeAppBar extends StatelessWidget {
                         ),
                         width: isTablet ? 50.w : 25.w,
                         child: Center(
-                          child: Image.network(
-                            state.profile.data!.profilePhotoUrl.toString(),
+                          child: CachedNetworkImage(
+                           imageUrl: state.profile.data!.profilePhotoUrl.toString(),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -138,8 +138,8 @@ class HomeAppBar extends StatelessWidget {
                         ),
                         width: isTablet ? 50.w : 20.w,
                         child: Center(
-                          child: Image.network(
-                            state.profile.data!.profilePhotoUrl.toString(),
+                          child: CachedNetworkImage(
+                           imageUrl: state.profile.data!.profilePhotoUrl.toString(),
                             fit: BoxFit.cover,
                           ),
                         ),

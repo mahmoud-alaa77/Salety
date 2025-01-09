@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,8 +36,9 @@ class BestValuesList extends StatelessWidget {
                     child: SizedBox(
                       width: isTablet ? 400.w : 280.w,
                       height: isTablet ? 200.h : 120.h,
-                      child: Image.network(
-                        "https://master-market.masool.net/uploads/${state.products.data![index].img}",
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            "https://master-market.masool.net/uploads/${state.products.data![index].img}",
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -85,9 +87,9 @@ class BestValuesList extends StatelessWidget {
                     child: SizedBox(
                       width: isTablet ? 450.w : 180.w,
                       height: isTablet ? 215.h : 160.h,
-                      child: Image.network(
-                      
-                           "https://master-market.masool.net/uploads/${state.products.data![index].img}",
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            "https://master-market.masool.net/uploads/${state.products.data![index].img}",
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -101,14 +103,14 @@ class BestValuesList extends StatelessWidget {
         } else {
           return SizedBox(
               width: double.infinity,
-            height: isTablet ? 220.h : 170.h,
+              height: isTablet ? 220.h : 170.h,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return CustomShimmerLoadingContainer(
                     width: isTablet ? 450.w : 180.w,
-                      height: isTablet ? 215.h : 160.h,
+                    height: isTablet ? 215.h : 160.h,
                   );
                 },
               ));
