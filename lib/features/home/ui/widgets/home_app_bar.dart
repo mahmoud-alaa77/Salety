@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,7 +48,8 @@ class HomeAppBar extends StatelessWidget {
                         width: isTablet ? 50.w : 25.w,
                         child: Center(
                           child: CachedNetworkImage(
-                           imageUrl: state.profile.data!.profilePhotoUrl.toString(),
+                            imageUrl:
+                                state.profile.data!.profilePhotoUrl.toString(),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -139,7 +141,8 @@ class HomeAppBar extends StatelessWidget {
                         width: isTablet ? 50.w : 20.w,
                         child: Center(
                           child: CachedNetworkImage(
-                           imageUrl: state.profile.data!.profilePhotoUrl.toString(),
+                            imageUrl:
+                                state.profile.data!.profilePhotoUrl.toString(),
                             fit: BoxFit.cover,
                           ),
                         ),

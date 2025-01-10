@@ -132,6 +132,9 @@ class ProfileScreenBody extends StatelessWidget {
                     isTablet: isTablet,
                     icon: Icons.exit_to_app_outlined,
                     text: "خروج",
+                    onTap: () {
+                      context.pushReplacementNamed(Routes.authScreen);
+                    },
                     color: AppColors.greenColor),
                 CustomColoredButton(
                     isTablet: isTablet,

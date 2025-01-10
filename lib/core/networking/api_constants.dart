@@ -7,6 +7,7 @@ class ApiConstants {
   static const String signUp = 'register';
   static const String profile ='profile';
   static const String sliderProducts ='/advertising/t/ar/0';
+  static const String categories = '/categories/get_with_sub/ar/0/0';
 
 
 }

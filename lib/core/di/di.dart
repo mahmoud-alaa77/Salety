@@ -7,6 +7,7 @@ import 'package:task1intern/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:task1intern/features/auth/sign_up/data/repo/sign_up_repo.dart';
 import 'package:task1intern/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
 import 'package:task1intern/features/home/data/repo/home_repo.dart';
+import 'package:task1intern/features/home/logic/cubit/categories_cubit.dart';
 import 'package:task1intern/features/home/logic/cubit/slider_product_cubit.dart';
 import 'package:task1intern/features/profile/data/repo/profile_repo.dart';
 import 'package:task1intern/features/profile/logic/cubit/profile_cubit.dart';
@@ -40,6 +41,7 @@ Future<void> setupGetIt() async {
 
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   getIt.registerFactory<SliderProductCubit>(() => SliderProductCubit(getIt()));
+   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
 }
 
 // Dio createAndSetUpDio() {

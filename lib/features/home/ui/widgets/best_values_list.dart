@@ -98,8 +98,10 @@ class BestValuesList extends StatelessWidget {
               },
             ),
           );
-        } else if (state is SliderProductLoading) {
-          return CircularProgressIndicator();
+        } else if (state is SliderProductError) {
+          return Center(
+            child: Text(state.message),
+          );
         } else {
           return SizedBox(
               width: double.infinity,
