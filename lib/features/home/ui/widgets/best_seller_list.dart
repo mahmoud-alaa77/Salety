@@ -19,7 +19,7 @@ class BestSellerList extends StatelessWidget {
 
     return SizedBox(
         width: double.infinity,
-        height: isTablet ? longSide / 2.6 : !isTablet&&isPortrait? 450.h :650.h,
+        height: isTablet ? longSide / 2.6 : !isTablet&&isPortrait? 500.h :650.h,
         child: GridView.builder(
           padding: EdgeInsetsDirectional.symmetric(horizontal: 16.r),
           itemCount: 20,

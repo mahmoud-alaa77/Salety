@@ -73,6 +73,7 @@ class MyApp extends StatelessWidget {
 
 checkIfLoggedInUser() async {
   String? userToken = await SharedPrefHelper.getString('token');
+  // ignore: unnecessary_null_comparison
   if (userToken!.isNotEmpty || userToken != null) {
     isLoggedInUser = true;
   } else {

@@ -126,7 +126,7 @@ class CategoryProductItem extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          maiCategory,
+                          name,
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -135,7 +135,7 @@ class CategoryProductItem extends StatelessWidget {
                     ),
                     verticalSpace(4),
                     Text(
-                      name,
+                      maiCategory,
                       style: AppTextStyles.font12greyw200,
                     ),
                     verticalSpace(4),

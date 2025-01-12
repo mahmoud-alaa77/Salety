@@ -79,7 +79,7 @@ class MainScreenState extends State<MainScreen> {
                   padding: EdgeInsetsDirectional.all(8.r),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.green.withOpacity(.8),
+                    color: Colors.green.withValues(alpha: .8),
                     border: Border.all(color: Colors.white, width: 4),
                   ),
                   child: Image.asset(
