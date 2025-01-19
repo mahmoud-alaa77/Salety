@@ -1,13 +1,9 @@
-
-
-
 class ApiConstants {
   static const String apiBaseUrl = 'https://master-market.masool.net/api/';
   static const String login = 'login';
   static const String signUp = 'register';
-  static const String profile ='profile';
-  static const String sliderProducts ='/advertising/t/ar/0';
+  static const String profile = 'profile';
+  static const String sliderProducts = '/advertising/t/ar/0';
   static const String categories = '/categories/get_with_sub/ar/0/0';
-
-
+  static const String products = "/products/t/ar/0/0/0?page={pageNum}";
 }

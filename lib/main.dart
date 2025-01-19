@@ -13,12 +13,11 @@ import 'package:task1intern/features/local_notification_helper.dart';
 import 'package:task1intern/firebase_notificathion_helper.dart';
 import 'package:task1intern/firebase_options.dart';
 
-
 bool isLoggedInUser = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-    await checkIfLoggedInUser();
+  await checkIfLoggedInUser();
   Bloc.observer = SimpleBlocObserver();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -64,7 +63,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [
           Locale('ar'),
         ],
-        initialRoute: isLoggedInUser ? Routes.mainScreen : Routes.splashScreen,
+        initialRoute: Routes.splashScreen,
         onGenerateRoute: appRouter.genrateRoute,
       ),
     );

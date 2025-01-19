@@ -19,4 +19,5 @@ class Routes {
   static const String successOrderScreen = "/success_order_screen";
   static const String trackOrderScreen = "/track_order_screen";
   static const String notificationsScreen = "/notifications_screen";
+  static const String allProductsScreen = "/all_products";
 }

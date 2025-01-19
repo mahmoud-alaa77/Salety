@@ -5,6 +5,7 @@ import 'package:task1intern/features/auth/login/data/models/request_model.dart';
 import 'package:task1intern/features/auth/sign_up/data/models/sign_up_request_model.dart';
 import 'package:task1intern/features/auth/sign_up/data/models/sign_up_response_model.dart';
 import 'package:task1intern/features/home/data/models/category_model.dart';
+import 'package:task1intern/features/home/data/models/product_model.dart';
 import 'package:task1intern/features/home/data/models/slider_products_model.dart';
 import 'package:task1intern/features/profile/data/models/profile_response_model.dart';
 
@@ -30,4 +31,7 @@ abstract class ApiService {
 
   @GET(ApiConstants.categories)
   Future<CategoryModel> getCategories();
+
+  @GET(ApiConstants.products)
+  Future<ProductModel> getAllProducts(@Path("pageNum") int pageNum);
 }

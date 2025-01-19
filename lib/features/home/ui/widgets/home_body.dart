@@ -72,9 +72,12 @@ class HomeBody extends StatelessWidget {
           ),
         ),
         verticalSpace(isTablet ? 24 : 12),
-        const CategoryTitleWidget(
+        CategoryTitleWidget(
           title: 'الاكثر مبيعا',
           subtitle: "",
+          onTap: () {
+            context.pushNamed(Routes.allProductsScreen);
+          },
         ),
         verticalSpace(isTablet ? 24 : 12),
         const BestSellerList(),
@@ -151,9 +154,12 @@ class HomeBody extends StatelessWidget {
         ),
       ),
       verticalSpace(isTablet ? 24 : 12),
-      const CategoryTitleWidget(
+      CategoryTitleWidget(
         title: 'الاكثر مبيعا',
         subtitle: "",
+        onTap: () {
+          context.pushNamed(Routes.allProductsScreen);
+        },
       ),
       verticalSpace(isTablet ? 24 : 12),
       const BestSellerList(),

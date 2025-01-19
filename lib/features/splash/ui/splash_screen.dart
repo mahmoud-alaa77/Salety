@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:task1intern/core/helper/constants.dart';
 import 'package:task1intern/core/helper/spacing.dart';
 import 'package:task1intern/core/routing/routes.dart';
+import 'package:task1intern/features/home/ui/main_screen.dart';
 import 'package:task1intern/features/onboarding/ui/onboarding_screen.dart';
+import 'package:task1intern/main.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -50,8 +52,8 @@ class SplashScreen extends StatelessWidget {
       duration: 600,
       backgroundColor: Colors.transparent,
       animationDuration: const Duration(milliseconds: 1500),
-      nextScreen: const OnboardingScreen(),
-      nextRoute: Routes.onBoardingScreen,
+      nextScreen: isLoggedInUser ? MainScreen() : const OnboardingScreen(),
+      nextRoute: isLoggedInUser ? Routes.mainScreen : Routes.onBoardingScreen,
     );
   }
 }
