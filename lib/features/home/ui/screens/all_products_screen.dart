@@ -139,7 +139,6 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                       onTap: () {
                         setState(() {
                           if (currentPage != 1) {
-                            print(currentPage);
                             currentPage--;
                           }
                           context
