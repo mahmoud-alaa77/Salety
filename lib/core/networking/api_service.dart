@@ -4,6 +4,7 @@ import 'package:task1intern/core/networking/api_constants.dart';
 import 'package:task1intern/features/auth/login/data/models/request_model.dart';
 import 'package:task1intern/features/auth/sign_up/data/models/sign_up_request_model.dart';
 import 'package:task1intern/features/auth/sign_up/data/models/sign_up_response_model.dart';
+import 'package:task1intern/features/favorites/data/models/fav_product_model.dart';
 import 'package:task1intern/features/home/data/models/category_model.dart';
 import 'package:task1intern/features/home/data/models/product_model.dart';
 import 'package:task1intern/features/home/data/models/slider_products_model.dart';
@@ -33,5 +34,11 @@ abstract class ApiService {
   Future<CategoryModel> getCategories();
 
   @GET(ApiConstants.products)
-  Future<ProductModel> getAllProducts(@Path("pageNum") int pageNum);
+  Future<ProductModel> getAllProducts(@Path("pageNum") int pageNum, @Path("userId")int userId);
+
+  @GET(ApiConstants.favorites)
+  Future<FavoriteProductModel> getFavoriteProducts();
+
+  @POST(ApiConstants.addOrDeleteFavorite)
+  Future<void> addOrDeleteFavoriteProduct(@Path("id") int id);
 }
