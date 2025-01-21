@@ -8,11 +8,17 @@ import 'package:task1intern/core/routing/routes.dart';
 import 'package:task1intern/core/themes/app_colors.dart';
 import 'package:task1intern/core/themes/app_text_styles.dart';
 import 'package:task1intern/core/widgets/custom_shimmer_loading_container.dart';
+import 'package:task1intern/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:task1intern/features/home/logic/cubit/products_cubit.dart';
 
-class BestSellerList extends StatelessWidget {
+class BestSellerList extends StatefulWidget {
   const BestSellerList({super.key});
 
+  @override
+  State<BestSellerList> createState() => _BestSellerListState();
+}
+
+class _BestSellerListState extends State<BestSellerList> {
   @override
   Widget build(BuildContext context) {
     bool isPortrait =
@@ -40,15 +46,167 @@ class BestSellerList extends StatelessWidget {
                     mainAxisSpacing: 16,
                     childAspectRatio: 16 / 12),
                 itemBuilder: (context, index) {
-                  return BestSellerItem(
-                    image: state.products.data!.data![index].img.toString(),
-                    title: state.products.data!.data![index].name.toString(),
-                    price: state.products.data!.data![index].price.toString(),
-                    details:
-                        state.products.data!.data![index].details.toString(),
-                    isFav: state.products.data!.data![index].isFavorite == 0
-                        ? false
-                        : true,
+                  return GestureDetector(
+                    onTap: () {
+                      context.pushNamed(Routes.shopingCartScreen);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadiusDirectional.circular(16.r),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadiusDirectional.circular(16.r),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: 10,
+                              child: GestureDetector(
+                                child: Container(
+                                  width: 60,
+                                  height: 25,
+                                  decoration: const BoxDecoration(
+                                    color: AppColors.greenColor,
+                                    borderRadius: BorderRadiusDirectional.only(
+                                        bottomEnd: Radius.circular(16),
+                                        topEnd: Radius.circular(16)),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      "جديد",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                                top: 10,
+                                left: 10,
+                                child: GestureDetector(
+                                  onTap: () {
+                                  setState(() {
+                                    state.products.data!.data![index]
+                                        .isFavorite = state.products.data!
+                                                .data![index].isFavorite ==
+                                            0
+                                        ? 1
+                                        : 0;
+                                  });
+                                  context
+                                      .read<FavoritesCubit>()
+                                      .addOrDeleteProduct(state
+                                          .products.data!.data![index].id!);
+                                },
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: state.products.data!.data![index]
+                                                .isFavorite !=
+                                            0
+                                        ? AppColors.greenColor
+                                        : Colors.grey,
+                                    size: isPortrait ? 30.w : 15.w,
+                                  ),
+                                ),),
+                            Positioned(
+                              bottom: 0,
+                              child: Container(
+                                width: 450 * 16 / 12,
+                                height: 40.h,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.withValues(alpha: .7),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.symmetric(
+                                      vertical: 4.r),
+                                  child: Row(
+                                    children: [
+                                      horizontalSpace(12),
+                                      Text(
+                                        "${state.products.data!.data![index].price.toString()} EGP",
+                                        style: AppTextStyles.font18BlackW300
+                                            .copyWith(fontSize: 16),
+                                      ),
+                                      horizontalSpace(12.w),
+                                      CircleAvatar(
+                                        backgroundColor: AppColors.redColor,
+                                        child: Icon(
+                                          Icons.date_range,
+                                          color: Colors.white,
+                                          size: 20.r,
+                                        ),
+                                      ),
+                                      horizontalSpace(6),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  verticalSpace(32),
+                                  Align(
+                                      alignment: AlignmentDirectional.center,
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            "https://master-market.masool.net/uploads/${state.products.data!.data![index].img.toString()}",
+                                        width: isPortrait ? 50.w : 45.w,
+                                        errorWidget: (context, url, error) {
+                                          return SizedBox(
+                                            width: 50,
+                                            height: 70.h,
+                                            child: Center(
+                                              child: Icon(
+                                                Icons.error,
+                                                color: AppColors.redColor,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )),
+                                  verticalSpace(4),
+                                  // Container(
+                                  //   width: 80,
+                                  //   height: 25,
+                                  //   decoration: BoxDecoration(
+                                  //     color: Colors.orange,
+                                  //     borderRadius: BorderRadius.circular(16),
+                                  //   ),
+                                  //   child: const Center(
+                                  //     child: Text(
+                                  //       "فواكه",
+                                  //       style: TextStyle(
+                                  //         color: Colors.white,
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // verticalSpace(4),
+                                  Text(
+                                    state.products.data!.data![index].name
+                                        .toString(),
+                                    style: AppTextStyles.font14BlackW300,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  verticalSpace(4),
+                                  Text(
+                                    state.products.data!.data![index].details
+                                        .toString(),
+                                    style: AppTextStyles.font12greyw200,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   );
                 },
               );
@@ -71,165 +229,5 @@ class BestSellerList extends StatelessWidget {
             }
           },
         ));
-  }
-}
-
-class BestSellerItem extends StatelessWidget {
-  final String image;
-  final String title;
-  final String details;
-  final String price;
-  final bool isFav;
-
-  const BestSellerItem({
-    super.key,
-    required this.image,
-    required this.title,
-    required this.price,
-    required this.isFav,
-    required this.details,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    bool isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
-    return GestureDetector(
-      onTap: () {
-        context.pushNamed(Routes.shopingCartScreen);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadiusDirectional.circular(16.r),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadiusDirectional.circular(16.r),
-          child: Stack(
-            children: [
-              Positioned(
-                top: 10,
-                child: Container(
-                  width: 60,
-                  height: 25,
-                  decoration: const BoxDecoration(
-                    color: AppColors.greenColor,
-                    borderRadius: BorderRadiusDirectional.only(
-                        bottomEnd: Radius.circular(16),
-                        topEnd: Radius.circular(16)),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "جديد",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                  top: 10,
-                  left: 10,
-                  child: Icon(
-                    Icons.favorite,
-                    color: isFav ? AppColors.greenColor : Colors.grey,
-                    size: isPortrait ? 30.w : 15.w,
-                  )),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  width: 450 * 16 / 12,
-                  height: 40.h,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withValues(alpha: .7),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.symmetric(vertical: 4.r),
-                    child: Row(
-                      children: [
-                        horizontalSpace(12),
-                        Text(
-                          "$price EGP",
-                          style: AppTextStyles.font18BlackW300
-                              .copyWith(fontSize: 16),
-                        ),
-                        horizontalSpace(12.w),
-                        CircleAvatar(
-                          backgroundColor: AppColors.redColor,
-                          child: Icon(
-                            Icons.date_range,
-                            color: Colors.white,
-                            size: 20.r,
-                          ),
-                        ),
-                        horizontalSpace(6),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    verticalSpace(32),
-                    Align(
-                        alignment: AlignmentDirectional.center,
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              "https://master-market.masool.net/uploads/$image",
-                          width: isPortrait ? 50.w : 45.w,
-                          errorWidget: (context, url, error) {
-                            return SizedBox(
-                              width: 50,
-                              height: 70.h,
-                              child: Center(
-                                child: Icon(
-                                  Icons.error,
-                                  color: AppColors.redColor,
-                                ),
-                              ),
-                            );
-                          },
-                        )),
-                    verticalSpace(4),
-                    // Container(
-                    //   width: 80,
-                    //   height: 25,
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.orange,
-                    //     borderRadius: BorderRadius.circular(16),
-                    //   ),
-                    //   child: const Center(
-                    //     child: Text(
-                    //       "فواكه",
-                    //       style: TextStyle(
-                    //         color: Colors.white,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // verticalSpace(4),
-                    Text(
-                      title,
-                      style: AppTextStyles.font14BlackW300,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    verticalSpace(4),
-                    Text(
-                      details,
-                      style: AppTextStyles.font12greyw200,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

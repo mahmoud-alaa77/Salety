@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task1intern/core/helper/spacing.dart';
 import 'package:task1intern/core/themes/app_colors.dart';
 import 'package:task1intern/core/themes/app_text_styles.dart';
@@ -46,7 +46,7 @@ class ImageAndNameSection extends StatelessWidget {
                                         orientation == Orientation.portrait)
                                     ? 68.w
                                     : 35.w,
-                            backgroundColor: Colors.white.withOpacity(.3),
+                            backgroundColor: Colors.white.withValues(alpha: .3),
                             child: Container(
                               width: isTablet ? 100.w : 120.w,
                               height: isTablet ? 100.w : 120.w,
@@ -54,10 +54,22 @@ class ImageAndNameSection extends StatelessWidget {
                                   color: Colors.yellow, shape: BoxShape.circle),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100.r),
-                                child: Image.network(
-                                  state.profile.data!.profilePhotoUrl
+                                child: CachedNetworkImage(
+                                  imageUrl: state.profile.data!.profilePhotoUrl
                                       .toString(),
                                   fit: BoxFit.fill,
+                                  errorWidget: (context, url, error) {
+                                    return SizedBox(
+                                      width: 50,
+                                      height: 70.h,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.error,
+                                          color: AppColors.redColor,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             )),
@@ -75,10 +87,10 @@ class ImageAndNameSection extends StatelessWidget {
                           style: isTablet
                               ? AppTextStyles.font14greyw200.copyWith(
                                   fontSize: 24.sp,
-                                  color: Colors.white.withOpacity(.7))
+                                  color: Colors.white.withValues(alpha: .7))
                               : AppTextStyles.font24WhiteBold.copyWith(
                                   fontSize: 12.sp,
-                                  color: Colors.white.withOpacity(.7)),
+                                  color: Colors.white.withValues(alpha: .7)),
                           textAlign: TextAlign.center,
                         ),
                       ],

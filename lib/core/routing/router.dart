@@ -11,6 +11,7 @@ import 'package:task1intern/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:task1intern/features/auth/main_auth_screen.dart';
 import 'package:task1intern/features/auth/login/ui/login_screen.dart';
 import 'package:task1intern/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
+import 'package:task1intern/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:task1intern/features/home/data/models/category_model.dart';
 import 'package:task1intern/features/home/logic/cubit/categories_cubit.dart';
 import 'package:task1intern/features/home/logic/cubit/products_cubit.dart';
@@ -78,7 +79,10 @@ class AppRouter {
                     ),
                     BlocProvider(
                       create: (context) =>
-                          getIt<ProductsCubit>()..getAllProducts(0),
+                          getIt<ProductsCubit>()..getAllProducts(3),
+                    ),
+                    BlocProvider(
+                      create: (context) => getIt<FavoritesCubit>(),
                     ),
                   ],
                   child: const MainScreen(),
@@ -119,8 +123,16 @@ class AppRouter {
 
       case Routes.allProductsScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => getIt<ProductsCubit>()..getAllProducts(0),
+            builder: (context) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) =>
+                          getIt<ProductsCubit>()..getAllProducts(0),
+                    ),
+                    BlocProvider(
+                      create: (context) => getIt<FavoritesCubit>(),
+                    ),
+                  ],
                   child: const AllProductsScreen(),
                 ));
       case Routes.trackOrderScreen:

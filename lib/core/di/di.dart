@@ -6,6 +6,8 @@ import 'package:task1intern/features/auth/login/data/repo/login_repo.dart';
 import 'package:task1intern/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:task1intern/features/auth/sign_up/data/repo/sign_up_repo.dart';
 import 'package:task1intern/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
+import 'package:task1intern/features/favorites/data/repo/favorites_repo.dart';
+import 'package:task1intern/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:task1intern/features/home/data/repo/home_repo.dart';
 import 'package:task1intern/features/home/logic/cubit/categories_cubit.dart';
 import 'package:task1intern/features/home/logic/cubit/products_cubit.dart';
@@ -44,6 +46,11 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<SliderProductCubit>(() => SliderProductCubit(getIt()));
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
   getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));
+
+// Favorites
+
+  getIt.registerLazySingleton<FavoritesRepo>(() => FavoritesRepo(getIt()));
+  getIt.registerFactory<FavoritesCubit>(() => FavoritesCubit(getIt()));
 }
 
 // Dio createAndSetUpDio() {

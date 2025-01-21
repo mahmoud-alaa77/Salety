@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:task1intern/core/errors/failure.dart';
 import 'package:task1intern/core/errors/server_failure.dart';
+import 'package:task1intern/core/helper/shared_pref_helpers.dart';
 import 'package:task1intern/core/networking/api_service.dart';
 import 'package:task1intern/features/home/data/models/category_model.dart';
 import 'package:task1intern/features/home/data/models/product_model.dart';
@@ -38,7 +39,7 @@ class HomeRepo {
 
   Future<Either<Failure, ProductModel>> getProducts(int pageNumber) async {
     try {
-      final response = await apiService.getAllProducts(pageNumber);
+      final response = await apiService.getAllProducts(pageNumber, await SharedPrefHelper.getInt("userId"));
       return right(response);
     } catch (error) {
       if (error is DioException) {

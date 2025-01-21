@@ -185,7 +185,7 @@ class CategoriesListView extends StatelessWidget {
                                 alignment: AlignmentDirectional.center,
                                 child: CircleAvatar(
                                   radius: categoryItemSize.smallCircleRaduis,
-                                  backgroundColor: Colors.orange,
+                                  backgroundColor: Colors.transparent,
                                   backgroundImage: const AssetImage(
                                       "assets/images/category_icon.png"),
                                 ),
