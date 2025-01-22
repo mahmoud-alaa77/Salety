@@ -20,10 +20,21 @@ class UpperData {
   @JsonKey(name: "current_page")
   int? currentPage;
   List<Data>? data;
-
+  @JsonKey(name: "first_page_url")
+  String? firstPageUrl;
+  @JsonKey(name: "last_page_url")
+  String? lastPageUrl;
+  @JsonKey(name: "next_page_url")
+  String? nextPageUrl;
+  @JsonKey(name: "per_page")
+  int? totalPages;
   UpperData({
     this.currentPage,
     this.data,
+    this.firstPageUrl,
+    this.lastPageUrl,
+    this.nextPageUrl,
+    this.totalPages,
   });
   factory UpperData.fromJson(Map<String, dynamic> json) =>
       _$UpperDataFromJson(json);

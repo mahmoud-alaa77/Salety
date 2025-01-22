@@ -81,10 +81,10 @@ class _BestSellerListState extends State<BestSellerList> {
                               ),
                             ),
                             Positioned(
-                                top: 10,
-                                left: 10,
-                                child: GestureDetector(
-                                  onTap: () {
+                              top: 10,
+                              left: 10,
+                              child: GestureDetector(
+                                onTap: () {
                                   setState(() {
                                     state.products.data!.data![index]
                                         .isFavorite = state.products.data!
@@ -98,23 +98,24 @@ class _BestSellerListState extends State<BestSellerList> {
                                       .addOrDeleteProduct(state
                                           .products.data!.data![index].id!);
                                 },
-                                  child: Icon(
-                                    Icons.favorite,
-                                    color: state.products.data!.data![index]
-                                                .isFavorite !=
-                                            0
-                                        ? AppColors.greenColor
-                                        : Colors.grey,
-                                    size: isPortrait ? 30.w : 15.w,
-                                  ),
-                                ),),
+                                child: Icon(
+                                  Icons.favorite,
+                                  color: state.products.data!.data![index]
+                                              .isFavorite !=
+                                          0
+                                      ? AppColors.greenColor
+                                      : Colors.grey.withValues(alpha: .33),
+                                  size: isPortrait ? 30.w : 15.w,
+                                ),
+                              ),
+                            ),
                             Positioned(
                               bottom: 0,
                               child: Container(
                                 width: 450 * 16 / 12,
                                 height: 40.h,
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.withValues(alpha: .7),
+                                  color: Colors.grey.withValues(alpha: .33),
                                 ),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.symmetric(

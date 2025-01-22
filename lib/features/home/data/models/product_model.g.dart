@@ -26,11 +26,19 @@ UpperData _$UpperDataFromJson(Map<String, dynamic> json) => UpperData(
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
           .toList(),
+      firstPageUrl: json['first_page_url'] as String?,
+      lastPageUrl: json['last_page_url'] as String?,
+      nextPageUrl: json['next_page_url'] as String?,
+      totalPages: (json['per_page'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$UpperDataToJson(UpperData instance) => <String, dynamic>{
       'current_page': instance.currentPage,
       'data': instance.data,
+      'first_page_url': instance.firstPageUrl,
+      'last_page_url': instance.lastPageUrl,
+      'next_page_url': instance.nextPageUrl,
+      'per_page': instance.totalPages,
     };
 
 Data _$DataFromJson(Map<String, dynamic> json) => Data(

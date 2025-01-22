@@ -35,22 +35,25 @@ class FavoriterProductsScreenBody extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 2,
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            "https://master-market.masool.net/uploads/${state.favoriteProductModel.data?[index].product?.img.toString()}",
-                        width: isPortrait ? 100.w : 50.w,
-                        errorWidget: (context, url, error) {
-                          return SizedBox(
-                            width: 50,
-                            height: 70.h,
-                            child: Center(
-                              child: Icon(
-                                Icons.error,
-                                color: AppColors.redColor,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(24.r),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "https://master-market.masool.net/uploads/${state.favoriteProductModel.data?[index].product?.img.toString()}",
+                          width: isPortrait ? 100.w : 50.w,
+                          errorWidget: (context, url, error) {
+                            return SizedBox(
+                              width: 50,
+                              height: 70.h,
+                              child: Center(
+                                child: Icon(
+                                  Icons.error,
+                                  color: AppColors.redColor,
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     ),
                     horizontalSpace(6),
@@ -61,7 +64,8 @@ class FavoriterProductsScreenBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            state.favoriteProductModel.data?[index].product?.name
+                            state.favoriteProductModel.data?[index].product
+                                    ?.name
                                     .toString() ??
                                 "",
                             style: AppTextStyles.font14BlackW300,

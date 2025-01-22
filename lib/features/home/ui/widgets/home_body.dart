@@ -7,10 +7,7 @@ import 'package:task1intern/features/home/ui/widgets/best_seller_list.dart';
 import 'package:task1intern/features/home/ui/widgets/best_values_list.dart';
 import 'package:task1intern/features/home/ui/widgets/categories_list_view.dart';
 import 'package:task1intern/features/home/ui/widgets/category_title_widget.dart';
-import 'package:task1intern/features/home/ui/widgets/chances_list.dart';
 import 'package:task1intern/features/home/ui/widgets/home_app_bar.dart';
-import 'package:task1intern/features/home/ui/widgets/home_image_container.dart';
-import 'package:task1intern/features/home/ui/widgets/offers_list_view.dart';
 import 'package:task1intern/features/home/ui/widgets/search_section.dart';
 
 class HomeBody extends StatelessWidget {
@@ -81,37 +78,37 @@ class HomeBody extends StatelessWidget {
         ),
         verticalSpace(isTablet ? 24 : 12),
         const BestSellerList(),
-        verticalSpace(isTablet ? 24 : 12),
-        HomeImageContainer(
-          isTablet: isTablet,
-        ),
-        verticalSpace(isTablet ? 24 : 12),
-        const CategoryTitleWidget(
-          title: 'تسوق حسب العروض',
-          subtitle: "",
-        ),
-        verticalSpace(isTablet ? 24 : 12),
-        OffersListView(
-          isTablet: isTablet,
-        ),
-        verticalSpace(isTablet ? 24 : 12),
-        const CategoryTitleWidget(
-          title: 'طازج وسريع',
-          subtitle: "",
-        ),
-        verticalSpace(isTablet ? 24 : 12),
-        const BestSellerList(),
-        verticalSpace(isTablet ? 24 : 12),
-        HomeImageContainer(
-          isTablet: isTablet,
-        ),
-        verticalSpace(isTablet ? 24 : 12),
-        const CategoryTitleWidget(
-          title: 'انتهز الفرصة',
-          subtitle: "",
-        ),
-        verticalSpace(isTablet ? 24 : 12),
-        const ChancesList(),
+        // verticalSpace(isTablet ? 24 : 12),
+        // HomeImageContainer(
+        //   isTablet: isTablet,
+        // ),
+        // verticalSpace(isTablet ? 24 : 12),
+        // const CategoryTitleWidget(
+        //   title: 'تسوق حسب العروض',
+        //   subtitle: "",
+        // ),
+        // verticalSpace(isTablet ? 24 : 12),
+        // OffersListView(
+        //   isTablet: isTablet,
+        // ),
+        // verticalSpace(isTablet ? 24 : 12),
+        // const CategoryTitleWidget(
+        //   title: 'طازج وسريع',
+        //   subtitle: "",
+        // ),
+        // verticalSpace(isTablet ? 24 : 12),
+        // const BestSellerList(),
+        // verticalSpace(isTablet ? 24 : 12),
+        // HomeImageContainer(
+        //   isTablet: isTablet,
+        // ),
+        // verticalSpace(isTablet ? 24 : 12),
+        // const CategoryTitleWidget(
+        //   title: 'انتهز الفرصة',
+        //   subtitle: "",
+        // ),
+        // verticalSpace(isTablet ? 24 : 12),
+        // const ChancesList(),
       ],
     );
   }
@@ -163,38 +160,38 @@ class HomeBody extends StatelessWidget {
       ),
       verticalSpace(isTablet ? 24 : 12),
       const BestSellerList(),
-      verticalSpace(isTablet ? 24 : 12),
-      HomeImageContainer(
-        isTablet: isTablet,
-      ),
-      verticalSpace(isTablet ? 24 : 12),
-      const CategoryTitleWidget(
-        title: 'تسوق حسب العروض',
-        subtitle: "",
-      ),
-      verticalSpace(isTablet ? 24 : 12),
-      OffersListView(
-        isTablet: isTablet,
-      ),
-      verticalSpace(isTablet ? 24 : 12),
-      const CategoryTitleWidget(
-        title: 'طازج وسريع',
-        subtitle: "",
-      ),
-      verticalSpace(isTablet ? 24 : 12),
-      const BestSellerList(),
-      verticalSpace(isTablet ? 24 : 12),
-      verticalSpace(isTablet ? 24 : 12),
-      HomeImageContainer(
-        isTablet: isTablet,
-      ),
-      verticalSpace(isTablet ? 24 : 12),
-      const CategoryTitleWidget(
-        title: 'انتهز الفرصة',
-        subtitle: "",
-      ),
-      verticalSpace(isTablet ? 24 : 12),
-      const ChancesList(),
+      // verticalSpace(isTablet ? 24 : 12),
+      // HomeImageContainer(
+      //   isTablet: isTablet,
+      // ),
+      // verticalSpace(isTablet ? 24 : 12),
+      // const CategoryTitleWidget(
+      //   title: 'تسوق حسب العروض',
+      //   subtitle: "",
+      // ),
+      // verticalSpace(isTablet ? 24 : 12),
+      // OffersListView(
+      //   isTablet: isTablet,
+      // ),
+      // verticalSpace(isTablet ? 24 : 12),
+      // const CategoryTitleWidget(
+      //   title: 'طازج وسريع',
+      //   subtitle: "",
+      // ),
+      // verticalSpace(isTablet ? 24 : 12),
+      // const BestSellerList(),
+      // verticalSpace(isTablet ? 24 : 12),
+      // verticalSpace(isTablet ? 24 : 12),
+      // HomeImageContainer(
+      //   isTablet: isTablet,
+      // ),
+      // verticalSpace(isTablet ? 24 : 12),
+      // const CategoryTitleWidget(
+      //   title: 'انتهز الفرصة',
+      //   subtitle: "",
+      // ),
+      // verticalSpace(isTablet ? 24 : 12),
+      // const ChancesList(),
     ]);
   }
 }
