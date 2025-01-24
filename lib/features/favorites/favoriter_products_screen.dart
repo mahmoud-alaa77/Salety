@@ -18,103 +18,130 @@ class FavoriterProductsScreenBody extends StatelessWidget {
     return BlocBuilder<FavoritesCubit, FavoritesState>(
       builder: (context, state) {
         if (state is FavoritesLoaded) {
-          return ListView.builder(
-            itemCount: state.favoriteProductModel.data!.length,
-            itemBuilder: (context, index) {
-              // int? productId = state.favoriteProductModel.data![index].id;
-
-              return Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(24.r)),
-                margin: EdgeInsetsDirectional.symmetric(
-                    horizontal: isPortrait ? 16.r : 120.r, vertical: 12.r),
-                padding: EdgeInsetsDirectional.symmetric(
-                    horizontal: 8.r, vertical: 12.r),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(24.r),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              "https://master-market.masool.net/uploads/${state.favoriteProductModel.data?[index].product?.img.toString()}",
-                          width: isPortrait ? 100.w : 50.w,
-                          errorWidget: (context, url, error) {
-                            return SizedBox(
-                              width: 50,
-                              height: 70.h,
-                              child: Center(
-                                child: Icon(
-                                  Icons.error,
-                                  color: AppColors.redColor,
+          if (state.favoriteProductModel.data!.isEmpty) {
+            return Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.do_disturb_outlined,
+                    color: AppColors.redColor,
+                    size: 50.r,
+                  ),
+                  verticalSpace(12),
+                  Text(
+                    'قائمة المفضلة فارغة',
+                    style: AppTextStyles.font22BlackBold,
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: state.favoriteProductModel.data!.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(24.r)),
+                  margin: EdgeInsetsDirectional.symmetric(
+                      horizontal: isPortrait ? 16.r : 120.r, vertical: 12.r),
+                  padding: EdgeInsetsDirectional.symmetric(
+                      horizontal: 8.r, vertical: 12.r),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(24.r),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "https://master-market.masool.net/uploads/${state.favoriteProductModel.data?[index].product?.img.toString()}",
+                            width: isPortrait ? 100.w : 50.w,
+                            errorWidget: (context, url, error) {
+                              return SizedBox(
+                                width: 50,
+                                height: 70.h,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.error,
+                                    color: AppColors.redColor,
+                                  ),
                                 ),
-                              ),
-                            );
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      horizontalSpace(6),
+                      Expanded(
+                        flex: 4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.favoriteProductModel.data?[index].product
+                                      ?.name
+                                      .toString() ??
+                                  "",
+                              style: AppTextStyles.font14BlackW300,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            verticalSpace(4),
+                            Text(
+                              state.favoriteProductModel.data?[index].product
+                                      ?.details ??
+                                  "",
+                              style: AppTextStyles.font12greyw200,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            verticalSpace(4),
+                            Text(
+                              "${state.favoriteProductModel.data?[index].product?.price ?? ""} EGP",
+                              style: AppTextStyles.font12BlackW300
+                                  .copyWith(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          onTap: () async {
+                            await context
+                                .read<FavoritesCubit>()
+                                .addOrDeleteProduct(state
+                                    .favoriteProductModel.data![index].favId!);
                           },
+                          child: Icon(
+                            Icons.favorite,
+                            color: AppColors.greenColor,
+                            size: isPortrait ? 30.w : 15.w,
+                          ),
                         ),
-                      ),
-                    ),
-                    horizontalSpace(6),
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            state.favoriteProductModel.data?[index].product
-                                    ?.name
-                                    .toString() ??
-                                "",
-                            style: AppTextStyles.font14BlackW300,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          verticalSpace(4),
-                          Text(
-                            state.favoriteProductModel.data?[index].product
-                                    ?.details ??
-                                "",
-                            style: AppTextStyles.font12greyw200,
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          verticalSpace(4),
-                          Text(
-                            "${state.favoriteProductModel.data?[index].product?.price ?? ""} EGP",
-                            style: AppTextStyles.font12BlackW300
-                                .copyWith(fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: GestureDetector(
-                        onTap: () {
-                          // context
-                          //     .read<FavoritesCubit>()
-                          //     .addOrDeleteProduct(productId!);
-                        },
-                        child: Icon(
-                          Icons.favorite,
-                          color: AppColors.greenColor,
-                          size: isPortrait ? 30.w : 15.w,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            },
-          );
+                      )
+                    ],
+                  ),
+                );
+              },
+            );
+          }
         } else if (state is FavoritesError) {
           return Center(
               child: Text(
             state.errorMessage,
           ));
+        } else if (state is FavoriteProductAddOrDelete) {
+          return Center(
+            child: Text(
+              'جاري الحذف من المفضلة ...',
+              style: AppTextStyles.font18greyw200,
+            ),
+          );
         } else {
           return ListView.builder(
             itemCount: 7,

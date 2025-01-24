@@ -5,6 +5,7 @@ import 'package:task1intern/core/di/di.dart';
 import 'package:task1intern/core/themes/app_colors.dart';
 import 'package:task1intern/features/favorites/favoriter_products_screen.dart';
 import 'package:task1intern/features/favorites/logic/cubit/favorites_cubit.dart';
+import 'package:task1intern/features/home/logic/cubit/products_cubit.dart';
 import 'package:task1intern/features/home/ui/widgets/home_body.dart';
 import 'package:task1intern/features/profile/ui/profile_screen.dart';
 
@@ -21,6 +22,9 @@ class MainScreenState extends State<MainScreen> {
   void _onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
+      if (index == 0) {
+        context.read<ProductsCubit>().getAllProducts(3);
+      }
     });
   }
 

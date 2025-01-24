@@ -34,6 +34,11 @@ class _BestSellerListState extends State<BestSellerList> {
                 ? 500.h
                 : 650.h,
         child: BlocBuilder<ProductsCubit, ProductsState>(
+          buildWhen: (previous, current) =>
+              current is ProductsLoaded ||
+              current is ProductsError ||
+              current is ProductsInitial ||
+              current is ProductsLoading,
           builder: (context, state) {
             if (state is ProductsLoaded) {
               return GridView.builder(
@@ -220,8 +225,8 @@ class _BestSellerListState extends State<BestSellerList> {
                 scrollDirection: Axis.horizontal,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
                     childAspectRatio: 16 / 12),
                 itemBuilder: (context, index) {
                   return CustomShimmerLoadingContainer(height: 100, width: 100);

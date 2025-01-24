@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task1intern/core/helper/extentions.dart';
 import 'package:task1intern/core/helper/spacing.dart';
 import 'package:task1intern/core/themes/app_colors.dart';
 import 'package:task1intern/core/themes/app_text_styles.dart';
@@ -77,6 +78,14 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
         title: const Text('كل المنتجات'),
         elevation: 0,
         backgroundColor: AppColors.backGroundColor,
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back),
+        //   onPressed: () async{
+        //                 context.pop();
+
+        //     context.read<ProductsCubit>().getAllProducts(3);
+        //   },
+        // ),
       ),
       body: Column(
         children: [
