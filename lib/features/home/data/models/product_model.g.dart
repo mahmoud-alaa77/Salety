@@ -24,7 +24,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
 UpperData _$UpperDataFromJson(Map<String, dynamic> json) => UpperData(
       currentPage: (json['current_page'] as num?)?.toInt(),
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ProductData.fromJson(e as Map<String, dynamic>))
           .toList(),
       firstPageUrl: json['first_page_url'] as String?,
       lastPageUrl: json['last_page_url'] as String?,
@@ -41,7 +41,7 @@ Map<String, dynamic> _$UpperDataToJson(UpperData instance) => <String, dynamic>{
       'per_page': instance.totalPages,
     };
 
-Data _$DataFromJson(Map<String, dynamic> json) => Data(
+ProductData _$ProductDataFromJson(Map<String, dynamic> json) => ProductData(
       id: (json['id'] as num?)?.toInt(),
       userId: (json['user_id'] as num?)?.toInt(),
       type: (json['type'] as num?)?.toInt(),
@@ -74,7 +74,8 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       isFavorite: (json['is_favorite'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
+Map<String, dynamic> _$ProductDataToJson(ProductData instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
       'type': instance.type,

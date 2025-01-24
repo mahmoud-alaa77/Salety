@@ -19,7 +19,7 @@ class ProductModel {
 class UpperData {
   @JsonKey(name: "current_page")
   int? currentPage;
-  List<Data>? data;
+  List<ProductData>? data;
   @JsonKey(name: "first_page_url")
   String? firstPageUrl;
   @JsonKey(name: "last_page_url")
@@ -43,7 +43,7 @@ class UpperData {
 }
 
 @JsonSerializable()
-class Data {
+class ProductData {
   int? id;
   @JsonKey(name: "user_id")
   int? userId;
@@ -94,7 +94,7 @@ class Data {
   @JsonKey(name: "is_favorite")
   int? isFavorite;
 
-  Data({
+  ProductData({
     this.id,
     this.userId,
     this.type,
@@ -127,19 +127,12 @@ class Data {
     this.isFavorite,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  factory ProductData.fromJson(Map<String, dynamic> json) =>
+      _$ProductDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DataToJson(this);
+  Map<String, dynamic> toJson() => _$ProductDataToJson(this);
 }
 
-
-
-
-
-
-/*
-0000000000000000000000000
-*/
 
 
 
