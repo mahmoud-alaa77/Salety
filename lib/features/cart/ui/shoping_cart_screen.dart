@@ -8,8 +8,8 @@ import 'package:task1intern/core/themes/app_text_styles.dart';
 import 'package:task1intern/core/widgets/text_and_colored_buton.dart';
 import 'package:task1intern/core/widgets/custom_app_bar.dart';
 
-class ShoppingCartScreen extends StatelessWidget {
-  const ShoppingCartScreen({super.key});
+class ShoppingCartScreenBody extends StatelessWidget {
+  const ShoppingCartScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +18,15 @@ class ShoppingCartScreen extends StatelessWidget {
     bool isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
     bool isTablet = MediaQuery.sizeOf(context).shortestSide >= 600;
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: AppColors.backGroundColor,
-          body: OrientationBuilder(builder: (context, orientation) {
-            if (orientation == Orientation.portrait) {
-              return buildPortraitLayout(
-                  isTablet, isPortrait, screenWidth, screenHeight, context);
-            } else {
-              return buildLandScapeLayout(
-                  isTablet, isPortrait, screenWidth, screenHeight, context);
-            }
-          })),
-    );
+    return OrientationBuilder(builder: (context, orientation) {
+      if (orientation == Orientation.portrait) {
+        return buildPortraitLayout(
+            isTablet, isPortrait, screenWidth, screenHeight, context);
+      } else {
+        return buildLandScapeLayout(
+            isTablet, isPortrait, screenWidth, screenHeight, context);
+      }
+    });
   }
 
   Column buildPortraitLayout(bool isTablet, bool isPortrait, double screenWidth,
@@ -39,13 +35,12 @@ class ShoppingCartScreen extends StatelessWidget {
       children: [
         Padding(
             padding: EdgeInsetsDirectional.symmetric(
-                horizontal: isTablet ? 16.r : 8.r, vertical: 16.r),
-            child: CustomAppBar(
-                title: "عربة التسوق",
-                textStyle: isTablet
+                horizontal: isTablet ? 16.r : 8.r, vertical: 20.r),
+            child: Text("عربة التسوق",
+                style: isTablet
                     ? AppTextStyles.font26BlackBold
                     : AppTextStyles.font18BlackW300)),
-        verticalSpace(isTablet ? 24 : 16),
+        verticalSpace(isTablet ? 24 : 4),
         Expanded(
             child: ListView.builder(
           itemCount: 8,
@@ -182,7 +177,7 @@ class ShoppingCartScreen extends StatelessWidget {
                 width: screenWidth,
                 fontSize: isTablet ? 28.sp : 20.sp,
                 color: AppColors.greenColor)),
-        verticalSpace(isTablet ? 24 : 12),
+        verticalSpace(isTablet ? 32 : 24),
       ],
     );
   }
