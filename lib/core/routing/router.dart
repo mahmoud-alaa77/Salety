@@ -13,13 +13,15 @@ import 'package:task1intern/features/auth/login/ui/login_screen.dart';
 import 'package:task1intern/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
 import 'package:task1intern/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:task1intern/features/home/data/models/category_model.dart';
+import 'package:task1intern/features/home/data/models/product_model.dart';
 import 'package:task1intern/features/home/logic/cubit/categories_cubit.dart';
 import 'package:task1intern/features/home/logic/cubit/products_cubit.dart';
 import 'package:task1intern/features/home/logic/cubit/slider_product_cubit.dart';
 import 'package:task1intern/features/home/ui/main_screen.dart';
 import 'package:task1intern/features/home/ui/screens/all_categories_screen.dart';
 import 'package:task1intern/features/home/ui/screens/all_products_screen.dart';
-import 'package:task1intern/features/home/ui/screens/shoping_cart_screen.dart';
+import 'package:task1intern/features/home/ui/screens/product_details_screen.dart';
+import 'package:task1intern/features/cart/ui/shoping_cart_screen.dart';
 import 'package:task1intern/features/home/ui/screens/one_category_screen.dart';
 import 'package:task1intern/features/notifications/ui/notifictions_screen.dart';
 import 'package:task1intern/features/onboarding/ui/onboarding_screen.dart';
@@ -104,9 +106,16 @@ class AppRouter {
             builder: (context) => OneCategoryScreen(
                   categoryModel: data,
                 ));
+
+      case Routes.oneProductScreen:
+        final product = settings.arguments as ProductData;
+        return MaterialPageRoute(
+            builder: (context) => ProductDetails(
+                  product: product,
+                ));
       case Routes.shopingCartScreen:
         return MaterialPageRoute(
-            builder: (context) => const ShoppingCartScreen());
+            builder: (context) => const ShoppingCartScreenBody());
       case Routes.paymentScrren:
         return MaterialPageRoute(builder: (context) => const PaymentScreen());
       case Routes.otpScreen:
