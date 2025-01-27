@@ -43,6 +43,7 @@ class HomeBody extends StatelessWidget {
         const CategoryTitleWidget(
           title: 'القيمة الافضل',
           subtitle: "اعلي المبيعات",
+          hasMore: false,
         ),
         verticalSpace(isTablet ? 24 : 12),
         BestValuesList(
@@ -52,6 +53,7 @@ class HomeBody extends StatelessWidget {
         CategoryTitleWidget(
           title: 'التصنيفات',
           subtitle: "",
+          hasMore: false,
           onTap: () {
             context.pushNamed(Routes.allCategoriesScreen);
           },
@@ -72,6 +74,7 @@ class HomeBody extends StatelessWidget {
         CategoryTitleWidget(
           title: 'الاكثر مبيعا',
           subtitle: "",
+          hasMore: true,
           onTap: () {
             context.pushNamed(Routes.allProductsScreen);
           },
@@ -123,6 +126,7 @@ class HomeBody extends StatelessWidget {
           child: const SearchSection()),
       verticalSpace(isTablet ? 24 : 16),
       const CategoryTitleWidget(
+        hasMore: false,
         title: 'القيمة الافضل',
         subtitle: "اعلي المبيعات",
       ),
@@ -132,6 +136,7 @@ class HomeBody extends StatelessWidget {
       ),
       verticalSpace(isTablet ? 24 : 12),
       CategoryTitleWidget(
+        hasMore: false,
         title: 'التصنيفات',
         subtitle: "",
         onTap: () {
@@ -152,6 +157,7 @@ class HomeBody extends StatelessWidget {
       ),
       verticalSpace(isTablet ? 24 : 12),
       CategoryTitleWidget(
+        hasMore: true,
         title: 'الاكثر مبيعا',
         subtitle: "",
         onTap: () {

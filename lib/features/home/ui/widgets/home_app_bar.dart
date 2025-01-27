@@ -25,6 +25,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
     context.read<ProfileCubit>().getProfileData();
     super.initState();
   }
+  @override
   Widget build(BuildContext context) {
     bool isTablet = MediaQuery.sizeOf(context).shortestSide >= 600;
     bool isPortrait =

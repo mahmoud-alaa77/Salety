@@ -8,8 +8,13 @@ class CategoryTitleWidget extends StatelessWidget {
   final String title;
   final String subtitle;
   final void Function()? onTap;
+  final bool hasMore;
   const CategoryTitleWidget(
-      {super.key, required this.title, required this.subtitle, this.onTap});
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      this.onTap,
+      required this.hasMore});
 
   @override
   Widget build(BuildContext context) {
@@ -31,25 +36,27 @@ class CategoryTitleWidget extends StatelessWidget {
                   ? AppTextStyles.font20greyw200
                   : AppTextStyles.font12greyw200),
           const Spacer(),
-          GestureDetector(
-            onTap: onTap,
-            child: Row(
-              children: [
-                Text(
-                  "مشاهدة الكل",
-                  style: isTablet
-                      ? AppTextStyles.font20greyw200
-                      : AppTextStyles.font12greyw200,
-                ),
-                horizontalSpace(2),
-                Icon(
-                  Icons.send,
-                  color: AppColors.greyColor,
-                  size: isTablet ? 25.w : 15.w,
-                ),
-              ],
-            ),
-          )
+          hasMore
+              ? GestureDetector(
+                  onTap: onTap,
+                  child: Row(
+                    children: [
+                      Text(
+                        "مشاهدة الكل",
+                        style: isTablet
+                            ? AppTextStyles.font20greyw200
+                            : AppTextStyles.font12greyw200,
+                      ),
+                      horizontalSpace(2),
+                      Icon(
+                        Icons.send,
+                        color: AppColors.greyColor,
+                        size: isTablet ? 25.w : 15.w,
+                      ),
+                    ],
+                  ),
+                )
+              : SizedBox.shrink()
         ],
       ),
     );
