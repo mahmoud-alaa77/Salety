@@ -52,8 +52,8 @@ class SplashScreen extends StatelessWidget {
       duration: 600,
       backgroundColor: Colors.transparent,
       animationDuration: const Duration(milliseconds: 1500),
-      nextScreen: isLoggedInUser ? MainScreen() : const OnboardingScreen(),
-      nextRoute: isLoggedInUser ? Routes.mainScreen : Routes.onBoardingScreen,
+      nextScreen: const OnboardingScreen(),
+      nextRoute:  Routes.onBoardingScreen,
     );
   }
 }

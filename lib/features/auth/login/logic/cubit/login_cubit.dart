@@ -23,8 +23,12 @@ class LoginCubit extends Cubit<LoginState> {
 
     response.fold((failure) {
       emit(LoginError(errorMessage: failure.errorMessage));
-    }, (responseModel) {
-      saveUserTokenAndUserId(responseModel.data!.token.toString(),responseModel.data!.id!.toInt());
+    }, (responseModel) async{
+      if (responseModel.status == true && responseModel.data != null) {
+       await saveUserTokenAndUserId(responseModel.data!.token.toString(),
+            responseModel.data!.id!.toInt());
+      }
+
       emit(LoginSuccess(responseModel: responseModel));
     });
   }
@@ -40,9 +44,9 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Future<void> saveUserTokenAndUserId(String token,int userId) async {
+  Future<void> saveUserTokenAndUserId(String token, int userId) async {
     await SharedPrefHelper.saveDataByKey("token", token);
     await SharedPrefHelper.saveDataByKey("userId", userId);
-        DioFactory.setTokenIntoHeaderAfterLogin(token);
+    DioFactory.setTokenIntoHeaderAfterLogin(token);
   }
 }

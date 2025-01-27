@@ -12,10 +12,19 @@ import 'package:task1intern/core/widgets/custom_icon_button.dart';
 import 'package:task1intern/core/widgets/custom_shimmer_loading_container.dart';
 import 'package:task1intern/features/profile/logic/cubit/profile_cubit.dart';
 
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatefulWidget {
   const HomeAppBar({super.key});
 
   @override
+  State<HomeAppBar> createState() => _HomeAppBarState();
+}
+
+class _HomeAppBarState extends State<HomeAppBar> {
+  @override
+  initState() {
+    context.read<ProfileCubit>().getProfileData();
+    super.initState();
+  }
   Widget build(BuildContext context) {
     bool isTablet = MediaQuery.sizeOf(context).shortestSide >= 600;
     bool isPortrait =

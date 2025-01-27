@@ -70,10 +70,6 @@ class AppRouter {
                   providers: [
                     BlocProvider(
                       create: (context) =>
-                          getIt<ProfileCubit>()..getProfileData(),
-                    ),
-                    BlocProvider(
-                      create: (context) =>
                           getIt<SliderProductCubit>()..getSliderProducts(),
                     ),
                     BlocProvider(
@@ -89,6 +85,10 @@ class AppRouter {
                     ),
                     BlocProvider(
                       create: (context) => getIt<CartCubit>(),
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          getIt<ProfileCubit>()..getProfileData(),
                     ),
                   ],
                   child: const MainScreen(),

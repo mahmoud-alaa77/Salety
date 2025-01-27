@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:task1intern/core/di/di.dart';
 import 'package:task1intern/core/helper/bloc_observer.dart';
+import 'package:task1intern/core/helper/extentions.dart';
 import 'package:task1intern/core/helper/shared_pref_helpers.dart';
 import 'package:task1intern/core/routing/router.dart';
 import 'package:task1intern/core/routing/routes.dart';
@@ -20,13 +23,13 @@ bool isLoggedInUser = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await checkIfLoggedInUser();
 
   await Hive.initFlutter();
-    Hive.registerAdapter(HiveProductCartAdapter());
+  Hive.registerAdapter(HiveProductCartAdapter());
 
   await Hive.openBox('cart');
 
-  await checkIfLoggedInUser();
   Bloc.observer = SimpleBlocObserver();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -57,8 +60,6 @@ class MyApp extends StatelessWidget {
       designSize: const Size(392, 872),
       child: MaterialApp(
         navigatorKey: navigatorKey,
-        // locale: DevicePreview.locale(context),
-        // builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -72,7 +73,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [
           Locale('ar'),
         ],
-        initialRoute: Routes.splashScreen,
+        initialRoute: isLoggedInUser ? Routes.mainScreen : Routes.splashScreen,
         onGenerateRoute: appRouter.genrateRoute,
       ),
     );
@@ -80,11 +81,14 @@ class MyApp extends StatelessWidget {
 }
 
 checkIfLoggedInUser() async {
-  String? userToken = await SharedPrefHelper.getString('token');
+  String userToken = await SharedPrefHelper.getString('token');
+  log(userToken.toString());
   // ignore: unnecessary_null_comparison
-  if (userToken!.isNotEmpty || userToken != null) {
+  if (!userToken.isNullOrEmpty() ) {
     isLoggedInUser = true;
   } else {
     isLoggedInUser = false;
   }
+    log(isLoggedInUser.toString());
+
 }
