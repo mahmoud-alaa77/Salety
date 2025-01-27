@@ -79,7 +79,7 @@ class CategoriesListView extends StatelessWidget {
                                 alignment: AlignmentDirectional.center,
                                 child: CircleAvatar(
                                   radius: categoryItemSize.smallCircleRaduis,
-                                  backgroundColor: Colors.orange,
+                                  backgroundColor: Colors.transparent,
                                   backgroundImage: NetworkImage(
                                     "https://master-market.masool.net/uploads/${state.categories.data![index].img.toString()}",
                                   ),
@@ -134,7 +134,7 @@ class CategoriesListView extends StatelessWidget {
         builder: (context, state) {
           if (state is CategoriesLoaded) {
             return ListView.builder(
-              itemCount: 12,
+              itemCount: state.categories.data!.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return GestureDetector(
@@ -186,8 +186,9 @@ class CategoriesListView extends StatelessWidget {
                                 child: CircleAvatar(
                                   radius: categoryItemSize.smallCircleRaduis,
                                   backgroundColor: Colors.transparent,
-                                  backgroundImage: const AssetImage(
-                                      "assets/images/category_icon.png"),
+                                  backgroundImage: NetworkImage(
+                                    "https://master-market.masool.net/uploads/${state.categories.data![index].img.toString()}",
+                                  ),
                                 ),
                               ),
                               Align(
@@ -196,7 +197,7 @@ class CategoriesListView extends StatelessWidget {
                                     margin: EdgeInsetsDirectional.only(
                                         top: isTablet ? 14.h : 10.h),
                                     child: Text(
-                                      "فواكه",
+                                      state.categories.data![index].name.toString(),
                                       style: isTablet
                                           ? AppTextStyles.font16greyw200
                                               .copyWith(color: Colors.black)

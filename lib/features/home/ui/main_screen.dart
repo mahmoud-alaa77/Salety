@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task1intern/core/di/di.dart';
 import 'package:task1intern/core/themes/app_colors.dart';
+import 'package:task1intern/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:task1intern/features/cart/ui/shoping_cart_screen.dart';
 import 'package:task1intern/features/favorites/favoriter_products_screen.dart';
 import 'package:task1intern/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:task1intern/features/home/logic/cubit/products_cubit.dart';
@@ -34,12 +36,9 @@ class MainScreenState extends State<MainScreen> {
       create: (context) => getIt<FavoritesCubit>()..getFavoriteProducts(),
       child: FavoriterProductsScreenBody(),
     ),
-    const Center(
-      child: Icon(
-        Icons.notifications,
-        color: AppColors.greenColor,
-        size: 65,
-      ),
+    BlocProvider(
+      create: (context) => getIt<CartCubit>()..getAllCartProducts(),
+      child: const ShoppingCartScreenBody(),
     ),
     const ProfileScreenBody()
   ];
@@ -69,9 +68,9 @@ class MainScreenState extends State<MainScreen> {
                     label: '',
                     activeIcon: Icon(Icons.favorite)),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications_none_rounded),
+                    icon: Icon(Icons.shopping_basket_outlined),
                     label: '',
-                    activeIcon: Icon(Icons.notifications)),
+                    activeIcon: Icon(Icons.shopping_basket_outlined)),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.person_outline_rounded),
                     label: '',

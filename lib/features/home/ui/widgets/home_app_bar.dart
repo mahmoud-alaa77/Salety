@@ -156,6 +156,18 @@ class HomeAppBar extends StatelessWidget {
                             imageUrl:
                                 state.profile.data!.profilePhotoUrl.toString(),
                             fit: BoxFit.cover,
+                            errorWidget: (context, url, error) {
+                              return SizedBox(
+                                width: 50,
+                                height: 70.h,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.error,
+                                    color: AppColors.redColor,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       )),
@@ -226,6 +238,3 @@ class HomeAppBar extends StatelessWidget {
 }
 
 
-/*
-
-*/

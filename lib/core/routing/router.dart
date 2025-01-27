@@ -11,6 +11,7 @@ import 'package:task1intern/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:task1intern/features/auth/main_auth_screen.dart';
 import 'package:task1intern/features/auth/login/ui/login_screen.dart';
 import 'package:task1intern/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
+import 'package:task1intern/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:task1intern/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:task1intern/features/home/data/models/category_model.dart';
 import 'package:task1intern/features/home/data/models/product_model.dart';
@@ -85,6 +86,9 @@ class AppRouter {
                     ),
                     BlocProvider(
                       create: (context) => getIt<FavoritesCubit>(),
+                    ),
+                    BlocProvider(
+                      create: (context) => getIt<CartCubit>(),
                     ),
                   ],
                   child: const MainScreen(),

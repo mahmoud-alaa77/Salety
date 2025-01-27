@@ -53,7 +53,8 @@ class _BestSellerListState extends State<BestSellerList> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      context.pushNamed(Routes.shopingCartScreen);
+                      context.pushNamed(Routes.oneProductScreen,
+                          arguments: state.products.data!.data![index]);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -133,7 +134,7 @@ class _BestSellerListState extends State<BestSellerList> {
                                         style: AppTextStyles.font18BlackW300
                                             .copyWith(fontSize: 16),
                                       ),
-                                      horizontalSpace(12.w),
+                                      horizontalSpace(isPortrait? 12.w :4.r),
                                       CircleAvatar(
                                         backgroundColor: AppColors.redColor,
                                         child: Icon(
@@ -156,22 +157,25 @@ class _BestSellerListState extends State<BestSellerList> {
                                   verticalSpace(32),
                                   Align(
                                       alignment: AlignmentDirectional.center,
-                                      child: CachedNetworkImage(
-                                        imageUrl:
-                                            "https://master-market.masool.net/uploads/${state.products.data!.data![index].img.toString()}",
-                                        width: isPortrait ? 50.w : 45.w,
-                                        errorWidget: (context, url, error) {
-                                          return SizedBox(
-                                            width: 50,
-                                            height: 70.h,
-                                            child: Center(
-                                              child: Icon(
-                                                Icons.error,
-                                                color: AppColors.redColor,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(24),
+                                        child: CachedNetworkImage(
+                                          imageUrl:
+                                              "https://master-market.masool.net/uploads/${state.products.data!.data![index].img.toString()}",
+                                          width: isPortrait ? 50.w : 45.w,
+                                          errorWidget: (context, url, error) {
+                                            return SizedBox(
+                                              width: 50,
+                                              height: 70.h,
+                                              child: Center(
+                                                child: Icon(
+                                                  Icons.error,
+                                                  color: AppColors.redColor,
+                                                ),
                                               ),
-                                            ),
-                                          );
-                                        },
+                                            );
+                                          },
+                                        ),
                                       )),
                                   verticalSpace(4),
                                   // Container(

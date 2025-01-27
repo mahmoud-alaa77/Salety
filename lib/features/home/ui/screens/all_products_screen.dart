@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task1intern/core/helper/extentions.dart';
 import 'package:task1intern/core/helper/spacing.dart';
+import 'package:task1intern/core/routing/routes.dart';
 import 'package:task1intern/core/themes/app_colors.dart';
 import 'package:task1intern/core/themes/app_text_styles.dart';
 import 'package:task1intern/core/widgets/custom_shimmer_loading_container.dart';
@@ -21,7 +22,7 @@ class AllProductsScreen extends StatefulWidget {
 class _AllProductsScreenState extends State<AllProductsScreen> {
   int currentPage = 1;
   final ScrollController scrollController = ScrollController();
-  List<Data> products = [];
+  List<ProductData> products = [];
   bool isLoadingMore = false;
   bool hasMore = true;
 
@@ -135,26 +136,31 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
             ),
           );
         } else {
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(24.r),
-            ),
-            margin: EdgeInsets.symmetric(
-              horizontal: isPortrait ? 16.r : 120.r,
-              vertical: 12.r,
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: 8.r,
-              vertical: 12.r,
-            ),
-            child: Row(
-              children: [
-                _buildProductImage(product.img.toString(), isPortrait),
-                horizontalSpace(6),
-                _buildProductDetails(product),
-                _buildFavoriteIcon(context, product, isPortrait),
-              ],
+          return GestureDetector(
+            onTap: () {
+              context.pushNamed(Routes.oneProductScreen, arguments: product);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24.r),
+              ),
+              margin: EdgeInsets.symmetric(
+                horizontal: isPortrait ? 16.r : 120.r,
+                vertical: 12.r,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: 8.r,
+                vertical: 12.r,
+              ),
+              child: Row(
+                children: [
+                  _buildProductImage(product.img.toString(), isPortrait),
+                  horizontalSpace(6),
+                  _buildProductDetails(product),
+                  _buildFavoriteIcon(context, product, isPortrait),
+                ],
+              ),
             ),
           );
         }
